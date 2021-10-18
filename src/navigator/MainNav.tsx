@@ -1,13 +1,16 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/auth/AuthContext";
+import { AuthProvider } from "../context/auth/AuthProvider";
 import Drawer from "./drawer/Drawer";
 import AuthStack from "./stacks/AuthStack";
 
 const MainNav = () => {
-  const [logged, setLogged] = useState<boolean>(false);
+  const { authState } = useContext(AuthContext);
+  console.log(authState);
   return (
     <NavigationContainer>
-      {!logged ? <AuthStack /> : <Drawer />}
+      {!authState.userToken ? <AuthStack /> : <Drawer />}
     </NavigationContainer>
   );
 };
